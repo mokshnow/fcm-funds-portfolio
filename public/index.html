@@ -3035,7 +3035,6 @@
             <th>Maturity</th>
             <th>Yield</th>
             <th>Value</th>
-            <th>Held</th>
             <th>Annual NII</th>
             <th style="text-align: right;">Action</th>
           </tr>
@@ -3076,11 +3075,8 @@
             <div class="yield-lbl">Yield</div>
           </td>
           <td>
-            <div style="font-weight: 900;">${formatMoney(pos.market_value)}</div>
+            <div class="${isIssuerBreach ? 'held-breach' : ''}" style="font-weight: 900;">${formatMoney(pos.market_value)}</div>
             ${capLabel ? `<div style="font-size: 11px; font-weight: 800; color: var(--text-sub);">${capLabel}</div>` : ''}
-          </td>
-          <td>
-            <div class="${isIssuerBreach ? 'held-breach' : ''}" style="font-weight: 800;">${formatMoney(custAmt)}</div>
           </td>
           <td style="color: var(--rh-green); font-weight: 800;">+${formatMoney(nii)}</td>
           <td style="text-align: right;">${actionBtn}</td>
