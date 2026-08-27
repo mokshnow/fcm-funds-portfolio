@@ -1,0 +1,9 @@
+[project]
+name = "fcm-125-simulator"
+version = "0.1.0"
+description = "CFTC Rule 1.25 Customer Fund Treasury & Liquidity Simulator"
+dependencies = [
+    "numpy>=1.26.0",
+    "scipy>=1.11.0",
+]
+requires-python = ">=3.12"
