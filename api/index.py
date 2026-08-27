@@ -54,7 +54,7 @@ class handler(BaseHTTPRequestHandler):
         as_of = date.today()
 
         if preset_name == "balanced":
-            portfolio = PortfolioPresets.get_balanced_institutional_fcm(as_of, total_float)
+            portfolio = PortfolioPresets.get_default_for_float(as_of, total_float)
         elif preset_name == "aggressive":
             portfolio = PortfolioPresets.get_aggressive_yield_chaser(as_of, total_float)
         elif preset_name == "breached":
@@ -63,7 +63,7 @@ class handler(BaseHTTPRequestHandler):
             universe = get_standard_universe(as_of)
             portfolio = TreasuryOptimizer.optimize_allocation(as_of, total_float, universe)
         else:
-            portfolio = PortfolioPresets.get_balanced_institutional_fcm(as_of, total_float)
+            portfolio = PortfolioPresets.get_default_for_float(as_of, total_float)
 
         payload = build_full_dashboard_payload(
             portfolio=portfolio,
@@ -97,7 +97,7 @@ class handler(BaseHTTPRequestHandler):
                     allocations_map=custom_allocations
                 )
             elif preset_name == "balanced":
-                portfolio = PortfolioPresets.get_balanced_institutional_fcm(as_of, total_float)
+                portfolio = PortfolioPresets.get_default_for_float(as_of, total_float)
             elif preset_name == "aggressive":
                 portfolio = PortfolioPresets.get_aggressive_yield_chaser(as_of, total_float)
             elif preset_name == "breached":
@@ -106,7 +106,7 @@ class handler(BaseHTTPRequestHandler):
                 universe = get_standard_universe(as_of)
                 portfolio = TreasuryOptimizer.optimize_allocation(as_of, total_float, universe)
             else:
-                portfolio = PortfolioPresets.get_balanced_institutional_fcm(as_of, total_float)
+                portfolio = PortfolioPresets.get_default_for_float(as_of, total_float)
 
             payload = build_full_dashboard_payload(
                 portfolio=portfolio,

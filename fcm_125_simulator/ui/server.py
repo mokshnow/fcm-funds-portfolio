@@ -515,7 +515,7 @@ def create_custom_portfolio_from_allocations(
     )
 
 class DashboardRequestHandler(BaseHTTPRequestHandler):
-    current_portfolio = PortfolioPresets.get_balanced_institutional_fcm(date.today(), Decimal("11370355.00"))
+    current_portfolio = PortfolioPresets.get_kalshi_us_treasuries_focused(date.today(), Decimal("11370355.00"))
     yield_shift_bps = 0.0
     margin_call_amount = 2500000.0
     credit_facility = False
@@ -566,7 +566,7 @@ class DashboardRequestHandler(BaseHTTPRequestHandler):
                     firm_ri=firm_ri
                 )
             elif preset_name == "balanced":
-                DashboardRequestHandler.current_portfolio = PortfolioPresets.get_balanced_institutional_fcm(as_of, total_float)
+                DashboardRequestHandler.current_portfolio = PortfolioPresets.get_default_for_float(as_of, total_float)
             elif preset_name == "aggressive":
                 DashboardRequestHandler.current_portfolio = PortfolioPresets.get_aggressive_yield_chaser(as_of, total_float)
             elif preset_name == "breached":

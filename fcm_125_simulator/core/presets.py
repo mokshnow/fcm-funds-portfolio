@@ -832,6 +832,13 @@ class PortfolioPresets:
     """
 
     @staticmethod
+    def get_default_for_float(as_of_date: date, total_float: Decimal) -> TreasuryPortfolio:
+        """Kalshi-scale books use the Kalshi treasury profile; larger demos use balanced institutional."""
+        if total_float <= Decimal("25000000.00"):
+            return PortfolioPresets.get_kalshi_us_treasuries_focused(as_of_date, total_float)
+        return PortfolioPresets.get_balanced_institutional_fcm(as_of_date, total_float)
+
+    @staticmethod
     def get_balanced_institutional_fcm(as_of_date: date, total_float: Decimal = Decimal("500000000.00")) -> TreasuryPortfolio:
         """
         $500M Institutional Prime FCM Treasury Portfolio.
