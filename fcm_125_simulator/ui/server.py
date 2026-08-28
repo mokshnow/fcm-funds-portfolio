@@ -12,7 +12,7 @@ from typing import Dict, Any, Optional, List
 
 from ..core.types import AssetClass, ComplianceStatus, LiquidityTier, to_decimal, round_bps, round_money
 from ..core.portfolio import TreasuryPortfolio
-from ..core.presets import PortfolioPresets, get_standard_universe
+from ..core.presets import PortfolioPresets, get_standard_universe, KALSHI_REQUIRED_SEGREGATION, KALSHI_FIRM_RESIDUAL_INTEREST
 from ..rules.compliance import CFTC125ComplianceEngine
 from ..analytics.fixed_income import FixedIncomeAnalytics
 from ..analytics.mtm_pricing import MTMPricingEngine
@@ -476,7 +476,7 @@ def create_custom_portfolio_from_allocations(
     
     if firm_ri is None:
         if total_float <= Decimal("25000000.00"):
-            firm_ri = Decimal("4688126.00")
+            firm_ri = KALSHI_FIRM_RESIDUAL_INTEREST
         else:
             firm_ri = round_money(total_float * Decimal("0.05"))
     
@@ -515,7 +515,7 @@ def create_custom_portfolio_from_allocations(
     )
 
 class DashboardRequestHandler(BaseHTTPRequestHandler):
-    current_portfolio = PortfolioPresets.get_kalshi_us_treasuries_focused(date.today(), Decimal("11370355.00"))
+    current_portfolio = PortfolioPresets.get_kalshi_us_treasuries_focused(date.today(), KALSHI_REQUIRED_SEGREGATION)
     yield_shift_bps = 0.0
     margin_call_amount = 2500000.0
     credit_facility = False
@@ -552,7 +552,7 @@ class DashboardRequestHandler(BaseHTTPRequestHandler):
             data = json.loads(body.decode("utf-8")) if body else {}
 
             preset_name = data.get("preset", "balanced")
-            total_float = to_decimal(data.get("total_float", 500000000.0))
+            total_float = to_decimal(data.get("total_float", float(KALSHI_REQUIRED_SEGREGATION)))
             firm_ri_raw = data.get("firm_residual_interest")
             firm_ri = to_decimal(firm_ri_raw) if firm_ri_raw is not None else None
             custom_allocations = data.get("custom_allocations")

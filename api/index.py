@@ -21,7 +21,7 @@ from fcm_125_simulator.ui.server import (
     DecimalEncoder,
     create_custom_portfolio_from_allocations
 )
-from fcm_125_simulator.core.presets import PortfolioPresets, get_standard_universe
+from fcm_125_simulator.core.presets import PortfolioPresets, get_standard_universe, KALSHI_REQUIRED_SEGREGATION
 from fcm_125_simulator.analytics.optimizer import TreasuryOptimizer
 from fcm_125_simulator.core.types import to_decimal
 
@@ -46,9 +46,9 @@ class handler(BaseHTTPRequestHandler):
         params = parse_qs(parsed_url.query)
 
         preset_name = params.get("preset", ["balanced"])[0]
-        total_float = to_decimal(float(params.get("float", [500000000.0])[0]))
+        total_float = to_decimal(float(params.get("float", [float(KALSHI_REQUIRED_SEGREGATION)])[0]))
         yield_shift = float(params.get("yield_shift", [0.0])[0])
-        margin_call = float(params.get("margin_call", [50000000.0])[0])
+        margin_call = float(params.get("margin_call", [2500000.0])[0])
         credit_facility = params.get("credit_facility", ["false"])[0].lower() == "true"
 
         as_of = date.today()
@@ -82,10 +82,10 @@ class handler(BaseHTTPRequestHandler):
             data = json.loads(body.decode("utf-8")) if body else {}
 
             preset_name = data.get("preset", "balanced")
-            total_float = to_decimal(data.get("total_float", 500000000.0))
+            total_float = to_decimal(data.get("total_float", float(KALSHI_REQUIRED_SEGREGATION)))
             custom_allocations = data.get("custom_allocations")
             yield_shift = float(data.get("yield_shift_bps", 0.0))
-            margin_call = float(data.get("margin_call_amount", 50000000.0))
+            margin_call = float(data.get("margin_call_amount", 2500000.0))
             credit_facility = bool(data.get("credit_facility", False))
 
             as_of = date.today()

@@ -9,6 +9,10 @@ from .types import AssetClass, CreditRating, LiquidityTier, YieldType, to_decima
 from .instruments import Instrument, Position
 from .portfolio import TreasuryPortfolio
 
+# Kalshi customer-funds demo defaults (segregation statement, Aug 2026).
+KALSHI_REQUIRED_SEGREGATION = Decimal("11139675.00")
+KALSHI_FIRM_RESIDUAL_INTEREST = Decimal("4642477.00")
+
 def get_standard_universe(as_of_date: date) -> List[Instrument]:
     """Returns comprehensive universe of CFTC Rule 1.25 permitted instruments across all statutory categories."""
     return [
@@ -946,13 +950,13 @@ class PortfolioPresets:
         )
 
     @staticmethod
-    def get_kalshi_us_treasuries_focused(as_of_date: date, total_float: Decimal = Decimal("11370355.00")) -> TreasuryPortfolio:
+    def get_kalshi_us_treasuries_focused(as_of_date: date, total_float: Decimal = KALSHI_REQUIRED_SEGREGATION) -> TreasuryPortfolio:
         """
         Kalshi-Specific CFTC 1.25 Portfolio:
         Ultra-liquid, pristine cash and short Treasury-bill allocation.
         """
         insts = {inst.id: inst for inst in get_standard_universe(as_of_date)}
-        firm_ri = Decimal("4688126.00")
+        firm_ri = KALSHI_FIRM_RESIDUAL_INTEREST
 
         def make_pos(inst_id: str, alloc_usd: Decimal) -> Position:
             inst = insts[inst_id]

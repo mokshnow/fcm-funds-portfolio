@@ -1439,8 +1439,8 @@
             type="text"
             class="main-input"
             id="input-total-float"
-            value="11,370,355"
-            placeholder="11,370,355"
+            value="11,139,675"
+            placeholder="11,139,675"
             oninput="onFloatInput(this)"
             onblur="onFloatBlur(this)"
             autocomplete="off"
@@ -1458,8 +1458,8 @@
             type="text"
             class="main-input"
             id="input-invest-target"
-            value="9,892,209"
-            placeholder="9,892,209"
+            value="9,691,517"
+            placeholder="9,691,517"
             oninput="onAllocationInput(this)"
             onblur="onAllocationBlur(this)"
             autocomplete="off"
@@ -1530,15 +1530,15 @@
       <div class="hero-vitals-strip">
         <div class="hero-vital-box">
           <div class="hero-vital-label">Value held in segregation</div>
-          <div class="hero-vital-val" id="stat-held-segregation">$16,058,481</div>
+          <div class="hero-vital-val" id="stat-held-segregation">$15,782,152</div>
         </div>
         <div class="hero-vital-box">
           <div class="hero-vital-label">Value required to be in segregation</div>
-          <div class="hero-vital-val" id="stat-required-segregation">$11,370,355</div>
+          <div class="hero-vital-val" id="stat-required-segregation">$11,139,675</div>
         </div>
         <div class="hero-vital-box">
           <div class="hero-vital-label">Excess Collateral Value</div>
-          <div class="hero-vital-val" style="color: var(--rh-green);" id="stat-excess-collateral">$4,688,126</div>
+          <div class="hero-vital-val" style="color: var(--rh-green);" id="stat-excess-collateral">$4,642,477</div>
         </div>
         <div class="hero-vital-box">
           <div class="hero-vital-label">Portfolio WAM</div>
@@ -1859,6 +1859,10 @@
 </div>
 
 <script>
+  const KALSHI_REQUIRED_SEG = 11139675;
+  const KALSHI_FIRM_RI = 4642477;
+  const KALSHI_HELD_SEG = 15782152;
+
   let cachedUniverse = [];
   let rawData = null;
   let activeHoldingFilter = null;
@@ -2114,7 +2118,7 @@
 
   async function initApp() {
     try {
-      const res = await fetch('/api');
+      const res = await fetch('/api?float=' + KALSHI_REQUIRED_SEG);
       if (res.ok) {
         rawData = await res.json();
         cacheUniverseFromData(rawData);
@@ -2133,7 +2137,7 @@
   let customAllocations = {};
   let currentPreset = 'balanced';
   let marginCallAmount = 2500000;
-  let currentFirmRI = 4688126;
+  let currentFirmRI = KALSHI_FIRM_RI;
   let activeFilterCategory = 'ALL';
   let activeSearchQuery = '';
 
@@ -2353,7 +2357,7 @@
   }
 
   function getFloat() {
-    return parseMoneyInput(document.getElementById('input-total-float').value) || 11370355;
+    return parseMoneyInput(document.getElementById('input-total-float').value) || KALSHI_REQUIRED_SEG;
   }
 
   function onFloatInput(input) {
@@ -2378,7 +2382,7 @@
 
   function onFloatBlur(input) {
     let val = parseMoneyInput(input.value);
-    if (!input.value || val <= 0) val = 11370355;
+    if (!input.value || val <= 0) val = KALSHI_REQUIRED_SEG;
     input.value = Math.round(val).toLocaleString('en-US');
     onTotalFloatChange();
   }
@@ -2459,9 +2463,9 @@
   }
 
   function setKalshiFloat() {
-    const totalFloat = 11370355;
+    const totalFloat = KALSHI_REQUIRED_SEG;
     document.getElementById('input-total-float').value = totalFloat.toLocaleString('en-US');
-    currentFirmRI = 4688126;
+    currentFirmRI = KALSHI_FIRM_RI;
     
     // Standard Conservative Institutional FCM Structure
     customAllocations = {
@@ -2493,7 +2497,7 @@
   function onTotalFloatChange() {
     const totalFloat = getFloat();
     if (totalFloat <= 25000000) {
-      currentFirmRI = 4688126;
+      currentFirmRI = KALSHI_FIRM_RI;
     } else {
       currentFirmRI = Math.round(totalFloat * 0.05);
     }
