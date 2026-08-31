@@ -1439,8 +1439,8 @@
             type="text"
             class="main-input"
             id="input-total-float"
-            value="11,139,675"
-            placeholder="11,139,675"
+            value="12,430,458"
+            placeholder="12,430,458"
             oninput="onFloatInput(this)"
             onblur="onFloatBlur(this)"
             autocomplete="off"
@@ -1458,8 +1458,8 @@
             type="text"
             class="main-input"
             id="input-invest-target"
-            value="9,691,517"
-            placeholder="9,691,517"
+            value="10,814,500"
+            placeholder="10,814,500"
             oninput="onAllocationInput(this)"
             onblur="onAllocationBlur(this)"
             autocomplete="off"
@@ -1472,8 +1472,8 @@
     <!-- Allocation Slider Strip -->
     <div class="allocation-slider-wrap">
       <div class="allocation-slider-header">
-        <span id="lbl-invest-pct">Securities: <strong style="color: var(--text-main); font-weight: 600;">87%</strong> ($9.87M)</span>
-        <span id="lbl-cash-pct">Fed Cash: <strong style="color: var(--text-main); font-weight: 600;">13%</strong> ($1.50M + $4.69M RI)</span>
+        <span id="lbl-invest-pct">Securities: <strong style="color: var(--text-main); font-weight: 600;">87%</strong> ($10.81M)</span>
+        <span id="lbl-cash-pct">Fed Cash: <strong style="color: var(--text-main); font-weight: 600;">13%</strong> ($1.62M + $4.59M RI)</span>
       </div>
       <input type="range" class="slider" id="slider-invest-pct" min="20" max="100" step="1" value="87" oninput="onInvestRatioChange()" />
     </div>
@@ -1519,9 +1519,9 @@
               3.80% Fed IORB
             </div>
           </div>
-          <div class="hero-balance" id="portfolio-cash-total">$6,166,272</div>
+          <div class="hero-balance" id="portfolio-cash-total">$6,204,667</div>
           <div style="font-size: 12px; color: var(--text-sub); font-weight: 600;" id="portfolio-cash-breakdown">
-            Customer: <strong style="color: var(--text-main);" id="txt-cust-cash">$1,478,146</strong> (<span id="txt-cust-cash-pct">13.0%</span>) &bull; Firm RI: <strong style="color: var(--text-main);" id="txt-firm-ri">$4,688,126</strong>
+            Customer: <strong style="color: var(--text-main);" id="txt-cust-cash">$1,616,160</strong> (<span id="txt-cust-cash-pct">13.0%</span>) &bull; Firm RI: <strong style="color: var(--text-main);" id="txt-firm-ri">$4,588,507</strong>
           </div>
         </div>
       </div>
@@ -1530,15 +1530,15 @@
       <div class="hero-vitals-strip">
         <div class="hero-vital-box">
           <div class="hero-vital-label">Value held in segregation</div>
-          <div class="hero-vital-val" id="stat-held-segregation">$15,782,152</div>
+          <div class="hero-vital-val" id="stat-held-segregation">$17,018,965</div>
         </div>
         <div class="hero-vital-box">
           <div class="hero-vital-label">Value required to be in segregation</div>
-          <div class="hero-vital-val" id="stat-required-segregation">$11,139,675</div>
+          <div class="hero-vital-val" id="stat-required-segregation">$12,430,458</div>
         </div>
         <div class="hero-vital-box">
           <div class="hero-vital-label">Excess Collateral Value</div>
-          <div class="hero-vital-val" style="color: var(--rh-green);" id="stat-excess-collateral">$4,642,477</div>
+          <div class="hero-vital-val" style="color: var(--rh-green);" id="stat-excess-collateral">$4,588,507</div>
         </div>
         <div class="hero-vital-box">
           <div class="hero-vital-label">Portfolio WAM</div>
@@ -1859,9 +1859,9 @@
 </div>
 
 <script>
-  const KALSHI_REQUIRED_SEG = 11139675;
-  const KALSHI_FIRM_RI = 4642477;
-  const KALSHI_HELD_SEG = 15782152;
+  const KALSHI_REQUIRED_SEG = 12430458;
+  const KALSHI_FIRM_RI = 4588507;
+  const KALSHI_HELD_SEG = 17018965;
 
   let cachedUniverse = [];
   let rawData = null;
@@ -3478,7 +3478,7 @@
     
     <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 10px 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
       <span style="font-size: 12px; font-weight: 600; color: var(--text-sub);">Available Fed Cash:</span>
-      <span style="font-size: 14px; font-weight: 600; color: var(--rh-green);" id="buy-modal-avail-cash">$1,478,146</span>
+      <span style="font-size: 14px; font-weight: 600; color: var(--rh-green);" id="buy-modal-avail-cash">$1,616,160</span>
     </div>
 
     <div class="modal-input-card" onclick="document.getElementById('buy-modal-input').focus()">

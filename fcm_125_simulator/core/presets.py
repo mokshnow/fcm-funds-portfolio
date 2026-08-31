@@ -10,8 +10,8 @@ from .instruments import Instrument, Position
 from .portfolio import TreasuryPortfolio
 
 # Kalshi customer-funds demo defaults (segregation statement, Aug 2026).
-KALSHI_REQUIRED_SEGREGATION = Decimal("11139675.00")
-KALSHI_FIRM_RESIDUAL_INTEREST = Decimal("4642477.00")
+KALSHI_REQUIRED_SEGREGATION = Decimal("12430458.00")
+KALSHI_FIRM_RESIDUAL_INTEREST = Decimal("4588507.00")
 
 def get_standard_universe(as_of_date: date) -> List[Instrument]:
     """Returns comprehensive universe of CFTC Rule 1.25 permitted instruments across all statutory categories."""

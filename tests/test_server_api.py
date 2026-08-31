@@ -53,8 +53,8 @@ class TestServerAPI(unittest.TestCase):
 
     def test_nii_accuracy_100pct_fed_cash_scenario(self):
         from fcm_125_simulator.ui.server import create_custom_portfolio_from_allocations
-        total_float = Decimal("11139675.00")
-        firm_ri = Decimal("4642477.00")
+        total_float = Decimal("12430458.00")
+        firm_ri = Decimal("4588507.00")
         allocations = {"CASH-FED-RESERVE": float(total_float)}
         
         portfolio = create_custom_portfolio_from_allocations(self.as_of, total_float, allocations, firm_ri)
